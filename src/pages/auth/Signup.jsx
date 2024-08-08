@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import service from "../../service/service.config";
+import { AuthContext } from "../../context/auth.context";
 
 function Signup() {
   const navigate = useNavigate();
+  const { authenticateUser } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -34,6 +36,10 @@ function Signup() {
 
     try {
       const response = await service.post("/auth/signup", newUser);
+
+      localStorage.setItem("authToken", response.data.authToken);
+
+      authenticateUser();
 
       navigate("/movies");
     } catch (error) {

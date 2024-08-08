@@ -1,10 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import logo from "../assets/logo.jpg";
+import logout from "../assets/logout.png";
+import menu from "../assets/menu.png";
 
 export default function Navbar() {
   const { isLoggedIn, authenticateUser, isAdmin } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -14,34 +21,42 @@ export default function Navbar() {
   console.log(isLoggedIn);
 
   return (
-    <nav>
+    <nav className="navbar">
+      <img
+        src={menu}
+        alt="menu"
+        onClick={handleToggleMenu}
+        className="burger"
+      />
+
       <Link to="/">
-        <img src={logo} alt="logo" width={80} />
+        <img src={logo} alt="logo" width={80} className="nav-img" />
       </Link>
-
-      <Link to="/movies" className="no-underline">
-        <h4>Peliculas</h4>
-      </Link>
-
-      {!isLoggedIn && (
-        <Link to="/signup" className="no-underline">
-          <h4>Registro</h4>
-        </Link>
-      )}
-      {!isLoggedIn && (
-        <Link to="/login" className="no-underline">
-          <h4>Acceso</h4>
-        </Link>
-      )}
       {isLoggedIn && (
-        <button onClick={handleLogout}>
-          <h4>Cerrar sesión</h4>
-        </button>
+        <img src={logout} alt="logout" width={30} onClick={handleLogout} />
       )}
-      {isAdmin && (
-        <Link to="/admin" className="no-underline">
-          Panel de control
-        </Link>
+      {isOpen && (
+        <div className="menu">
+          <Link to="/movies" className="menu-item" onClick={handleToggleMenu}>
+            <h4>Peliculas</h4>
+          </Link>
+
+          {!isLoggedIn && (
+            <Link to="/signup" className="menu-item" onClick={handleToggleMenu}>
+              <h4>Registro</h4>
+            </Link>
+          )}
+          {!isLoggedIn && (
+            <Link to="/login" className="menu-item" onClick={handleToggleMenu}>
+              <h4>Acceso</h4>
+            </Link>
+          )}
+          {isAdmin && (
+            <Link to="/admin" className="menu-item" onClick={handleToggleMenu}>
+              Panel de control
+            </Link>
+          )}
+        </div>
       )}
     </nav>
   );

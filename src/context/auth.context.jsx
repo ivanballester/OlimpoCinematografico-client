@@ -23,7 +23,7 @@ function AuthProviderWrapper(props) {
     }
 
     try {
-      const response = service.get("/auth/verify");
+      const response = await service.get("/auth/verify");
       console.log(response);
       setIsLoggedIn(true);
       setIsLoading(false);
