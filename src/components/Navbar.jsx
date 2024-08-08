@@ -37,6 +37,9 @@ export default function Navbar() {
       )}
       {isOpen && (
         <div className="menu">
+          <button onClick={handleToggleMenu} className="close-button">
+            X
+          </button>
           <Link to="/movies" className="menu-item" onClick={handleToggleMenu}>
             <h4>Peliculas</h4>
           </Link>
@@ -54,6 +57,11 @@ export default function Navbar() {
           {isAdmin && (
             <Link to="/admin" className="menu-item" onClick={handleToggleMenu}>
               Panel de control
+            </Link>
+          )}
+          {isAdmin && (
+            <Link to="/admin" className="menu-item" onClick={handleToggleMenu}>
+              Añadir critica
             </Link>
           )}
         </div>
