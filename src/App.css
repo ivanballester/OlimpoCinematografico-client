@@ -2,17 +2,7 @@
   margin: 0 15px;
   background-color: #242424;
 }
-nav {
-  display: flex;
-  justify-content: space-between;
-  border-radius: 10px;
-  align-items: center;
-}
 
-.no-underline {
-  text-decoration: none;
-  color: white;
-}
 .signup-inputs {
   display: flex;
   flex-direction: column;

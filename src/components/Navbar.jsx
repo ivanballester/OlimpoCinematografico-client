@@ -46,12 +46,12 @@ export default function Navbar() {
 
           {!isLoggedIn && (
             <Link to="/signup" className="menu-item" onClick={handleToggleMenu}>
-              <h4>Registro</h4>
+              <h4>Registrarse</h4>
             </Link>
           )}
           {!isLoggedIn && (
             <Link to="/login" className="menu-item" onClick={handleToggleMenu}>
-              <h4>Acceso</h4>
+              <h4>Iniciar sesion</h4>
             </Link>
           )}
           {isAdmin && (
