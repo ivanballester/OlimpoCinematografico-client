@@ -5,8 +5,11 @@ import "./App.css";
 import HomePage from "./pages/HomePage";
 import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
+import AdminControlPanel from "./pages/AdminControlPanel";
+import ReviewsPage from "./pages/ReviewsPage";
 
 import Navbar from "./components/Navbar";
+import Admin from "./components/Auth/Admin";
 
 function App() {
   return (
@@ -17,15 +20,16 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        {/* <Route
+        <Route path="/movies" element={<ReviewsPage />} />
+        <Route
           path="/admin"
           element={
             <Admin>
               {" "}
-              <PaginaAdmin />{" "}
+              <AdminControlPanel />{" "}
             </Admin>
           }
-        /> */}
+        />
 
         {/* error FE routes here... */}
       </Routes>

@@ -8,14 +8,21 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handleNameChange = (e) => setName(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleconfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setError("Las contraseñas no coinciden");
+      return;
+    }
 
     const newUser = {
       email,
@@ -26,7 +33,6 @@ function Signup() {
     // ... contactar al backend para registrar al usuario aqui
 
     try {
-      // await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/auth/signup`, newUser)
       await service.post("/auth/signup", newUser);
 
       navigate("/login");
@@ -42,43 +48,56 @@ function Signup() {
 
   return (
     <div>
-      <h1>Formulario de Registro</h1>
+      <h1>REGISTRO</h1>
+      <div>
+        <form onSubmit={handleSignup}>
+          <div className="signup-inputs">
+            <label>E-mail</label>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleEmailChange}
+            />
+          </div>
+          <br />
+          <div className="signup-inputs">
+            <label>Nombre</label>
 
-      <form onSubmit={handleSignup}>
-        <label>Correo Electronico:</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
+            <input
+              type="text"
+              name="Name"
+              value={name}
+              onChange={handleNameChange}
+            />
+          </div>
+          <br />
+          <div className="signup-inputs">
+            <label>Contraseña</label>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+          </div>
+          <br />
+          <div className="signup-inputs">
+            <label>Repetir contraseña</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={handleconfirmPasswordChange}
+            />
+          </div>
+          <br />
 
-        <br />
+          <button type="submit">Registrar</button>
 
-        <label>Name:</label>
-        <input
-          type="text"
-          name="Name"
-          value={name}
-          onChange={handleNameChange}
-        />
-
-        <br />
-
-        <label>Contraseña:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-
-        <br />
-
-        <button type="submit">Registrar</button>
-
-        {errorMessage && <p>{errorMessage}</p>}
-      </form>
+          {errorMessage && <p>{errorMessage}</p>}
+        </form>
+      </div>
     </div>
   );
 }

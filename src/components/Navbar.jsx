@@ -16,7 +16,11 @@ export default function Navbar() {
       <Link to="/">
         <img src={logo} alt="logo" width={80} />
       </Link>
-      <h4>Peliculas</h4>
+      {!isLoggedIn && (
+        <Link to="/movies" className="no-underline">
+          <h4>Peliculas</h4>
+        </Link>
+      )}
       {!isLoggedIn && (
         <Link to="/signup" className="no-underline">
           <h4>Registro</h4>
@@ -32,7 +36,6 @@ export default function Navbar() {
           <span>Cerrar sesión</span>
         </button>
       )}
-      {/* {isLoggedIn && <Link onClick={handleLogout} to="/login"><span>Cerrar sesión</span></Link> } */}
       {isAdmin && (
         <Link to="/admin" className="no-underline">
           Panel de control
