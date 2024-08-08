@@ -11,16 +11,18 @@ export default function Navbar() {
     authenticateUser();
   };
 
+  console.log(isLoggedIn);
+
   return (
     <nav>
       <Link to="/">
         <img src={logo} alt="logo" width={80} />
       </Link>
-      {!isLoggedIn && (
-        <Link to="/movies" className="no-underline">
-          <h4>Peliculas</h4>
-        </Link>
-      )}
+
+      <Link to="/movies" className="no-underline">
+        <h4>Peliculas</h4>
+      </Link>
+
       {!isLoggedIn && (
         <Link to="/signup" className="no-underline">
           <h4>Registro</h4>
@@ -33,7 +35,7 @@ export default function Navbar() {
       )}
       {isLoggedIn && (
         <button onClick={handleLogout}>
-          <span>Cerrar sesión</span>
+          <h4>Cerrar sesión</h4>
         </button>
       )}
       {isAdmin && (

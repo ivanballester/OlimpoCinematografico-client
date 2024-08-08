@@ -9,7 +9,7 @@ function Signup() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [error, setError] = useState("");
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handleNameChange = (e) => setName(e.target.value);
@@ -18,6 +18,8 @@ function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    setError("");
 
     if (password !== confirmPassword) {
       setError("Las contraseñas no coinciden");
@@ -30,12 +32,10 @@ function Signup() {
       password,
     };
 
-    // ... contactar al backend para registrar al usuario aqui
-
     try {
-      await service.post("/auth/signup", newUser);
+      const response = await service.post("/auth/signup", newUser);
 
-      navigate("/login");
+      navigate("/movies");
     } catch (error) {
       console.log(error);
       if (error.response && error.response.status === 400) {
@@ -95,7 +95,7 @@ function Signup() {
 
           <button type="submit">Registrar</button>
 
-          {errorMessage && <p>{errorMessage}</p>}
+          {error && <p>{error}</p>}
         </form>
       </div>
     </div>
