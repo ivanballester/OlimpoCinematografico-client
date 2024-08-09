@@ -7,6 +7,7 @@ import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import AdminControlPanel from "./pages/AdminControlPanel";
 import ReviewsPage from "./pages/ReviewsPage";
+import ReviewAdd from "./pages/ReviewAdd";
 
 import Navbar from "./components/Navbar";
 import Admin from "./components/Auth/Admin";
@@ -22,11 +23,18 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/movies" element={<ReviewsPage />} />
         <Route
-          path="/admin"
+          path="/admin/control-panel"
           element={
             <Admin>
-              {" "}
-              <AdminControlPanel />{" "}
+              <AdminControlPanel />
+            </Admin>
+          }
+        />
+        <Route
+          path="/admin/new-review"
+          element={
+            <Admin>
+              <ReviewAdd />
             </Admin>
           }
         />

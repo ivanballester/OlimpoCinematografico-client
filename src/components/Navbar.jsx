@@ -29,7 +29,7 @@ export default function Navbar() {
         className="burger"
       />
 
-      <Link to="/">
+      <Link to="/" className="brand">
         <img src={logo} alt="logo" width={80} className="nav-img" />
       </Link>
       {isLoggedIn && (
@@ -55,12 +55,20 @@ export default function Navbar() {
             </Link>
           )}
           {isAdmin && (
-            <Link to="/admin" className="menu-item" onClick={handleToggleMenu}>
+            <Link
+              to="/admin/control-panel"
+              className="menu-item"
+              onClick={handleToggleMenu}
+            >
               Panel de control
             </Link>
           )}
           {isAdmin && (
-            <Link to="/admin" className="menu-item" onClick={handleToggleMenu}>
+            <Link
+              to="/admin/new-review"
+              className="menu-item"
+              onClick={handleToggleMenu}
+            >
               Añadir critica
             </Link>
           )}
