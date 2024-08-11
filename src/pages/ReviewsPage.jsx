@@ -74,6 +74,7 @@ function ReviewsPage() {
                     src={`https://image.tmdb.org/t/p/w200${movie.posterPath}`}
                     alt={movie.title}
                     className="movie-poster"
+                    style={{ cursor: "pointer" }}
                   />
                 </Link>
               </div>
