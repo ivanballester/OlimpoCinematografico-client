@@ -23,27 +23,26 @@ function ReviewsPage() {
         const reviewsData = reviewsResponse.data;
         console.log(reviewsData);
 
-        // Extract movieIds directly
-        const movieIds = reviewsData.map((review) => review.movieId);
-        console.log(movieIds);
-        // Fetch movie details from TMDB for each movieId
-        const movieRequests = movieIds.map((id) =>
-          axios.get(
-            `https://api.themoviedb.org/3/movie/${id}?api_key=${
-              import.meta.env.VITE_API_KEY
-            }&language=es-ES`
-          )
+        // Extract movieIds and reviewIds
+        const movieDetailsArray = await Promise.all(
+          reviewsData.map(async (review) => {
+            const movieResponse = await axios.get(
+              `https://api.themoviedb.org/3/movie/${review.movieId}?api_key=${
+                import.meta.env.VITE_API_KEY
+              }&language=es-ES`
+            );
+            console.log(movieResponse);
+            console.log(review);
+            const movieData = movieResponse.data;
+            return {
+              reviewId: review._id, // Store the reviewId for linking
+              movieId: movieData.id,
+              title: movieData.title,
+              posterPath: movieData.poster_path,
+            };
+          })
         );
-        console.log(movieRequests);
-        // Wait for all movie details to be fetched
-        const movieResponses = await Promise.all(movieRequests);
-        console.log(movieResponses);
-        // Process movie details into an array
-        const movieDetailsArray = movieResponses.map((response) => ({
-          id: response.data.id,
-          title: response.data.title,
-          posterPath: response.data.poster_path,
-        }));
+
         console.log(movieDetailsArray);
         setMovieDetails(movieDetailsArray);
       } catch (error) {
@@ -66,10 +65,10 @@ function ReviewsPage() {
       <div className="movies-container">
         {movieDetails.length > 0 ? (
           movieDetails.map((movie) => (
-            <div key={movie.id} className="movie-card">
+            <div key={movie.movieId} className="movie-card">
               <div className="movie-info">
                 <h2>{movie.title}</h2>
-                <Link to={`/reviews/${movie.id}`}>
+                <Link to={`/reviews/${movie.reviewId}`}>
                   <img
                     src={`https://image.tmdb.org/t/p/w200${movie.posterPath}`}
                     alt={movie.title}

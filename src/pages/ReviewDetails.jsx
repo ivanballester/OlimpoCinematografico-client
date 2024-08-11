@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function ReviewDetails() {
   const { reviewId } = useParams(); // Retrieve the reviewId from URL params
@@ -44,37 +47,54 @@ function ReviewDetails() {
     };
 
     fetchReviewAndMovie();
-  }, [reviewId]); // Ensure reviewId is included in the dependency array
+  }, [reviewId]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
+  // Carousel settings
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+  };
+
   return (
     <div className="review-details-page">
-      <h1>{movie.title || "Movie Title"}</h1>
+      <h1>{movie.title}</h1>
       <img
         src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
         alt={movie.title}
         className="movie-poster"
       />
+      <p>Sinopsis</p> {movie.overview}
       <p>
-        <strong>Review:</strong> {review.text}
+        <strong>Critica</strong> {review.text}
       </p>
       <p>
-        <strong>Rating:</strong> {review.rating}
+        <strong>Rating</strong> {review.rating}
       </p>
-      <h2>Actors</h2>
-      <ul>
-        {movie.credits?.cast?.length > 0 ? (
-          movie.credits.cast.map((actor) => (
-            <li key={actor.id}>{actor.name}</li>
-          ))
-        ) : (
-          <li>No cast information available</li>
-        )}
-      </ul>
-      <h2>Comments</h2>
-      {console.log(movie)}
+      <h2>Actores</h2>
+      <Slider {...settings}>
+        {movie.credits.cast.map((actor) => (
+          <div key={actor.id} className="actor-card">
+            <img
+              src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+              alt={actor.name}
+              className="actor-photo"
+            />
+            <p>
+              <strong>{actor.name}</strong>
+            </p>
+            <p>{actor.character}</p>
+          </div>
+        ))}
+      </Slider>
+      <h2>Comentarios...</h2>
     </div>
   );
 }
