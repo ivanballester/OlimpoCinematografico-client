@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import placeholder from "../assets/placeholder.svg";
 
 function ReviewDetails() {
   const { reviewId } = useParams(); // Retrieve the reviewId from URL params
@@ -60,30 +61,32 @@ function ReviewDetails() {
     slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
   };
 
   return (
     <div className="review-details-page">
       <h1>{movie.title}</h1>
       <img
-        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
         alt={movie.title}
-        className="movie-poster"
+        className="movie-poster2"
       />
-      <p>Sinopsis</p> {movie.overview}
       <p>
-        <strong>Critica</strong> {review.text}
+        <strong>Sinopsis</strong>
       </p>
-      <p>
-        <strong>Rating</strong> {review.rating}
-      </p>
-      <h2>Actores</h2>
+      {movie.overview}
+      <h2>Reparto</h2>
       <Slider {...settings}>
         {movie.credits.cast.map((actor) => (
           <div key={actor.id} className="actor-card">
             <img
-              src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+              src={
+                actor.profile_path
+                  ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
+                  : `${placeholder}`
+              }
               alt={actor.name}
               className="actor-photo"
             />
@@ -94,6 +97,12 @@ function ReviewDetails() {
           </div>
         ))}
       </Slider>
+      <p>
+        <strong>Critica</strong> {review.text}
+      </p>
+      <p>
+        <strong>Rating</strong> {review.rating}
+      </p>
       <h2>Comentarios...</h2>
     </div>
   );
