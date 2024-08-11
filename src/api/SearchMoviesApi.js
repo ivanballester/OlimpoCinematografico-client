@@ -6,8 +6,8 @@ export const searchMovies = async (query) => {
         import.meta.env.VITE_API_KEY
       }&language=es-ES&query=${encodeURIComponent(query)}`
     );
-    const data = await response.json();
-    return data.results; // Return the list of movies
+    console.log("API RESPONSE", response.data);
+    return response.data.results;
   } catch (error) {
     console.error("Error fetching movies:", error);
     return [];

@@ -31,7 +31,7 @@ function Login() {
       localStorage.setItem("authToken", response.data.authToken);
 
       authenticateUser();
-      navigate("/movies");
+      navigate("/reviews");
     } catch (error) {
       console.log(error);
       if (error.response && error.response.status === 400) {

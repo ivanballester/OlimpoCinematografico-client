@@ -41,7 +41,7 @@ function Signup() {
 
       authenticateUser();
 
-      navigate("/movies");
+      navigate("/reviews");
     } catch (error) {
       console.log(error);
       if (error.response && error.response.status === 400) {

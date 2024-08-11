@@ -40,7 +40,7 @@ export default function Navbar() {
           <button onClick={handleToggleMenu} className="close-button">
             X
           </button>
-          <Link to="/movies" className="menu-item" onClick={handleToggleMenu}>
+          <Link to="/reviews" className="menu-item" onClick={handleToggleMenu}>
             <h4>Peliculas</h4>
           </Link>
 
