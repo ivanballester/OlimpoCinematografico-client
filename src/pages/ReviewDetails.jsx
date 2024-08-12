@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Slider from "react-slick";
@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import placeholder from "../assets/placeholder.svg";
 import CommentForm from "../components/CommentForm";
 import service from "../service/service.config";
+import { AuthContext } from "../context/auth.context";
 
 function ReviewDetails() {
   const { reviewId } = useParams();
@@ -16,20 +17,15 @@ function ReviewDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const { user, isAdmin } = useContext(AuthContext);
+
   useEffect(() => {
     const fetchReviewAndMovie = async () => {
       try {
         const token = localStorage.getItem("authToken");
 
         // Fetch review data from the backend
-        const reviewResponse = await axios.get(
-          `${import.meta.env.VITE_SERVER_URL}/api/reviews/${reviewId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const reviewResponse = await service.get(`/reviews/${reviewId}`);
         const reviewData = reviewResponse.data;
 
         // Fetch movie details from TMDB using movieId from review data
@@ -46,8 +42,6 @@ function ReviewDetails() {
         );
         const commentsData = commentResponse.data;
         console.log(commentsData);
-
-        console.log(reviewData.comments);
         setReview(reviewData);
         setMovie(movieData);
         setComments(commentsData);
@@ -62,9 +56,26 @@ function ReviewDetails() {
     fetchReviewAndMovie();
   }, [reviewId]);
 
-  console.log(comments);
-  const addComment = (newComments) => {
-    setComments(newComments);
+  const addComment = async (newComment) => {
+    setComments((prevComments) => [...prevComments, newComment]);
+    try {
+      const commentResponse = await service.get(
+        `/reviews/${reviewId}/comments`
+      );
+      setComments(commentResponse.data);
+    } catch (error) {
+      console.error("Error fetching updated comments:", error);
+    }
+  };
+  const handleDeleteComment = async (commentId) => {
+    try {
+      await service.delete(`/comments/${commentId}`);
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment._id !== commentId)
+      );
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
   };
 
   if (loading) return <p>Loading...</p>;
@@ -115,7 +126,8 @@ function ReviewDetails() {
         ))}
       </Slider>
       <p>
-        <strong>Critica</strong> {review.text}
+        <strong>Mi critica personal</strong> <br />
+        {review.text}
       </p>
       <p>
         <strong>Rating</strong> {review.rating}
@@ -124,16 +136,25 @@ function ReviewDetails() {
       <h3>Comentarios</h3>
       <div>
         {comments.map((comment, index) => {
+          {
+            console.log(comment);
+          }
           return (
             <div key={index} className="comment">
-              <p>
-                <strong>{comment.creator.name}</strong>
+              <p style={{ display: "flex", alignItems: "center" }}>
+                <strong>{comment.creator?.name || "Unknown User"}</strong>
               </p>
               <p>{comment.text}</p>
+              {(comment.creator?._id === user || isAdmin) && (
+                <button onClick={() => handleDeleteComment(comment._id)}>
+                  Delete
+                </button>
+              )}
             </div>
           );
         })}
       </div>
+      <CommentForm reviewId={reviewId} onCommentAdded={addComment} />
     </div>
   );
 }

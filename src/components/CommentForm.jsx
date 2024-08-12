@@ -1,43 +1,62 @@
 import React, { useState } from "react";
-import axios from "axios";
 
-const CommentForm = ({ reviewId, addComment }) => {
+import service from "../service/service.config";
+
+function CommentForm({ reviewId, onCommentAdded }) {
   const [text, setText] = useState("");
+  const [rating, setRating] = useState(1);
+  const [error, setError] = useState(null);
+
+  const options = [1, 2, 3, 4, 5];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("authToken");
-
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/reviews/${reviewId}/comments`,
-        { text },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.data) {
-        addComment(response.data.comments);
-        setText("");
-      }
-    } catch (error) {
-      console.error("Error adding comment:", error);
+      const response = await service.post(`/reviews/${reviewId}/comments`, {
+        text,
+        rating,
+      });
+      console.log(response);
+      onCommentAdded(response.data.comments);
+      setText("");
+      setRating(1);
+    } catch (err) {
+      setError("An error occurred while adding the comment.");
+      console.error(err);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <textarea
-        placeholder="Escribe tu comentario"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      ></textarea>
-      <button type="submit">Add Comment</button>
+      <h3>Añadir comentario</h3>
+      {error && <p className="error">{error}</p>}
+      <div>
+        <label>
+          Rating
+          <select
+            value={rating}
+            onChange={(e) => setRating(Number(e.target.value))}
+          >
+            {options.map((r) => (
+              <option key={r} value={r}>
+                {r}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <div>
+        <label className="comment-text">
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            required
+          />
+        </label>
+      </div>
+      <button type="submit">Submit</button>
     </form>
   );
-};
+}
 
 export default CommentForm;
