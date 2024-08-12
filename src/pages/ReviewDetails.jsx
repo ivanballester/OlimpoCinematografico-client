@@ -5,11 +5,14 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import placeholder from "../assets/placeholder.svg";
+import CommentForm from "../components/CommentForm";
+import service from "../service/service.config";
 
 function ReviewDetails() {
-  const { reviewId } = useParams(); // Retrieve the reviewId from URL params
+  const { reviewId } = useParams();
   const [movie, setMovie] = useState({});
   const [review, setReview] = useState({});
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -37,8 +40,17 @@ function ReviewDetails() {
         );
         const movieData = movieResponse.data;
 
+        // Fetch review comments
+        const commentResponse = await service.get(
+          `/reviews/${reviewId}/comments`
+        );
+        const commentsData = commentResponse.data;
+        console.log(commentsData);
+
+        console.log(reviewData.comments);
         setReview(reviewData);
         setMovie(movieData);
+        setComments(commentsData);
       } catch (error) {
         console.error("Error fetching data:", error);
         setError("An error occurred while fetching data.");
@@ -49,6 +61,11 @@ function ReviewDetails() {
 
     fetchReviewAndMovie();
   }, [reviewId]);
+
+  console.log(comments);
+  const addComment = (newComments) => {
+    setComments(newComments);
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -103,7 +120,20 @@ function ReviewDetails() {
       <p>
         <strong>Rating</strong> {review.rating}
       </p>
-      <h2>Comentarios...</h2>
+
+      <h3>Comentarios</h3>
+      <div>
+        {comments.map((comment, index) => {
+          return (
+            <div key={index} className="comment">
+              <p>
+                <strong>{comment.creator.name}</strong>
+              </p>
+              <p>{comment.text}</p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
