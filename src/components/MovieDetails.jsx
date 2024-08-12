@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import placeholder from "../assets/placeholder.svg";
 import Stars from "./ReviewRatingStars";
+import service from "../service/service.config";
 
-function MovieDetails({ movie, settings, review, isAdmin }) {
-  const handleEdit = () => {};
+function MovieDetails({ movie, settings, review, isAdmin, reviewId }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [reviewText, setReviewText] = useState(review.text);
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+  const handleSave = async () => {
+    setIsEditing(false);
+    try {
+      await service.patch(`/reviews/${reviewId}`, { text: reviewText });
+    } catch (error) {}
+  };
+  const handleChange = (e) => {
+    setReviewText(e.target.value);
+  };
   return (
     <div className="movie-details">
       <div className="title-sinopsis">
@@ -41,14 +55,32 @@ function MovieDetails({ movie, settings, review, isAdmin }) {
           </div>
         ))}
       </Slider>
-      <p className="personal-review">
+      <div className="personal-review">
         <strong>Mi crítica personal</strong>
         <Stars review={review} />
-        {review.text}
-      </p>
+        {isEditing ? (
+          <textarea
+            value={reviewText}
+            onChange={handleChange}
+            rows="10"
+            cols="50"
+          />
+        ) : (
+          <p>{reviewText}</p>
+        )}
+      </div>
       <div>
-        {isAdmin && <button onClick={handleEdit}>Editar</button>}
-        {isAdmin && <button>Borrar</button>}
+        {isAdmin && !isEditing && (
+          <>
+            <button onClick={handleEdit}>✏️</button>
+          </>
+        )}
+        {isAdmin && isEditing && (
+          <>
+            <button onClick={handleSave}>Guardar</button>
+            <button onClick={() => setIsEditing(false)}>Cancelar</button>
+          </>
+        )}
       </div>
     </div>
   );

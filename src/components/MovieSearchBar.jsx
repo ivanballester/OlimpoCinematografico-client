@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { searchMovies } from "../api/SearchMoviesApi";
 import { debounce } from "lodash"; // Import debounce function from lodash
 import { Link } from "react-router-dom";
-import axios from "axios";
 import service from "../service/service.config";
 
 function SearchBar() {
@@ -15,6 +14,7 @@ function SearchBar() {
   const [showForm, setShowForm] = useState(false);
   const [rating, setRating] = useState(0);
   const [text, setText] = useState("");
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   // Debounce the searchMovies function
   const debouncedSearch = debounce(async (query) => {
@@ -134,7 +134,7 @@ function SearchBar() {
             />
           </div>
           <button type="submit">Subir critica</button>
-          {error && <p style={{ color: "red" }}>{error}</p>}{" "}
+          {error && <p style={{ color: "red" }}>{error}</p>}
           {/* Display error if any */}
         </form>
       )}

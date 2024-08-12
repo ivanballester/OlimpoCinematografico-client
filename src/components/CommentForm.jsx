@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../context/auth.context";
 
 import service from "../service/service.config";
 
 function CommentForm({ reviewId, onCommentAdded }) {
+  const { user } = useContext(AuthContext);
   const [text, setText] = useState("");
   const [rating, setRating] = useState(1);
   const [error, setError] = useState(null);
@@ -26,7 +28,7 @@ function CommentForm({ reviewId, onCommentAdded }) {
     }
   };
 
-  return (
+  return user ? (
     <form onSubmit={handleSubmit}>
       <h3>Añadir comentario</h3>
       {error && <p className="error">{error}</p>}
@@ -56,6 +58,8 @@ function CommentForm({ reviewId, onCommentAdded }) {
       </div>
       <button type="submit">Submit</button>
     </form>
+  ) : (
+    <h4> Registrate para poder crear comentarios </h4>
   );
 }
 

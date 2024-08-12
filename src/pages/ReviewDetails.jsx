@@ -98,6 +98,7 @@ function ReviewDetails() {
         settings={settings}
         review={review}
         isAdmin={isAdmin}
+        reviewId={reviewId}
       />
       <Comments
         comments={comments}
