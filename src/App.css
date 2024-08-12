@@ -125,3 +125,31 @@
   display: flex;
   flex-direction: column;
 }
+.title-sinopsis {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.details-title {
+  border: 1px yellowgreen solid;
+  border-radius: 10px;
+  color: yellow;
+}
+.reviews-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.personal-review {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

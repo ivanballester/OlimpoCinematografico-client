@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import service from "../service/service.config";
+import tmdbservice from "../service/serviceTMDB";
 
 function ReviewsPage() {
   const [movieDetails, setMovieDetails] = useState([]);
@@ -11,14 +13,9 @@ function ReviewsPage() {
     const fetchMovies = async () => {
       try {
         // Fetch reviews from the backend
-        const token = localStorage.getItem("authToken");
-        const reviewsResponse = await axios.get(
-          `${import.meta.env.VITE_SERVER_URL}/api/reviews`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+
+        const reviewsResponse = await service.get(
+          `${import.meta.env.VITE_SERVER_URL}/api/reviews`
         );
         const reviewsData = reviewsResponse.data;
         console.log(reviewsData);
@@ -26,13 +23,13 @@ function ReviewsPage() {
         // Extract movieIds and reviewIds
         const movieDetailsArray = await Promise.all(
           reviewsData.map(async (review) => {
-            const movieResponse = await axios.get(
-              `https://api.themoviedb.org/3/movie/${review.movieId}?api_key=${
-                import.meta.env.VITE_API_KEY
-              }&language=es-ES`
+            const movieResponse = await tmdbservice.get(
+              `/movie/${review.movieId}`,
+              {
+                params: { language: "es-ES" },
+              }
             );
-            console.log(movieResponse);
-            console.log(review);
+
             const movieData = movieResponse.data;
             return {
               reviewId: review._id, // Store the reviewId for linking
@@ -43,10 +40,8 @@ function ReviewsPage() {
           })
         );
 
-        console.log(movieDetailsArray);
         setMovieDetails(movieDetailsArray);
       } catch (error) {
-        console.error("Error fetching data:", error);
         setError("An error occurred while fetching data.");
       } finally {
         setLoading(false);

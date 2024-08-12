@@ -1,40 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { searchMovies } from "../api/SearchMoviesApi"; // Ensure the path is correct
+import { searchMovies } from "../api/SearchMoviesApi";
 import { debounce } from "lodash"; // Import debounce function from lodash
 import { Link } from "react-router-dom";
-import axios from "axios"; // Import axios for making HTTP requests
+import axios from "axios";
+import service from "../service/service.config";
 
 function SearchBar() {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState([]); // Initialize as an array
-  const [selectedMovie, setSelectedMovie] = useState(null); // Track selected movie
+  const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [posterUrl, setPosterUrl] = useState(""); // Track selected movie's poster
-  const [showList, setShowList] = useState(true); // Control visibility of movie list
-  const [showForm, setShowForm] = useState(false); // Control visibility of the form
-  const [rating, setRating] = useState(0); // Default rating
-  const [text, setText] = useState(""); // Review text
+  const [posterUrl, setPosterUrl] = useState("");
+  const [showList, setShowList] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [text, setText] = useState("");
 
   // Debounce the searchMovies function
   const debouncedSearch = debounce(async (query) => {
-    if (!query) return; // Do nothing if the query is empty
+    if (!query) return;
 
     setLoading(true);
     setError(null);
 
     try {
       const results = await searchMovies(query);
-      console.log("Movies Results:", results); // Log results
+      console.log("Movies Results:", results);
       setMovies(Array.isArray(results) ? results : []); // Ensure results is an array
     } catch (error) {
-      console.error("Error in debouncedSearch:", error); // Log the error
+      console.error("Error in debouncedSearch:", error);
       setError("An error occurred while fetching movies.");
-      setMovies([]); // Optionally clear the movies on error
+      setMovies([]);
     } finally {
       setLoading(false);
     }
-  }, 1000); // Debounce delay of 300ms
+  }, 1000);
 
   const handleChange = (event) => {
     setQuery(event.target.value);
@@ -43,11 +43,11 @@ function SearchBar() {
   };
 
   const handleSelectMovie = (movie) => {
-    setSelectedMovie(movie); // Update selected movie
+    setSelectedMovie(movie);
     setQuery(movie.title); // Autocomplete the search bar
-    setPosterUrl(`https://image.tmdb.org/t/p/w200${movie.poster_path}`); // Set poster URL
-    setShowList(false); // Hide the list after selection
-    setShowForm(true); // Show the form after selection
+    setPosterUrl(`https://image.tmdb.org/t/p/w200${movie.poster_path}`);
+    setShowList(false);
+    setShowForm(true);
   };
 
   const handleSubmit = async (event) => {
@@ -60,21 +60,12 @@ function SearchBar() {
     }
 
     try {
-      // Make API call to save review
-      await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/reviews`,
-        {
-          movieId: selectedMovie.id,
-          rating,
-          text,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-          },
-        }
-      );
-      setShowForm(false); // Hide form after submission
+      await service.post(`/reviews`, {
+        movieId: selectedMovie.id,
+        rating,
+        text,
+      });
+      setShowForm(false);
     } catch (error) {
       console.error("Error submitting review:", error);
       setError("An error occurred while submitting the review.");
