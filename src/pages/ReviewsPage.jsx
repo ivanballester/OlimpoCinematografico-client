@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import service from "../service/service.config";
 import tmdbservice from "../service/serviceTMDB";
@@ -14,9 +13,7 @@ function ReviewsPage() {
       try {
         // Fetch reviews from the backend
 
-        const reviewsResponse = await service.get(
-          `${import.meta.env.VITE_SERVER_URL}/api/reviews`
-        );
+        const reviewsResponse = await service.get(`/reviews`);
         const reviewsData = reviewsResponse.data;
         console.log(reviewsData);
 
@@ -50,6 +47,7 @@ function ReviewsPage() {
 
     fetchMovies();
   }, []);
+  console.log(movieDetails);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;

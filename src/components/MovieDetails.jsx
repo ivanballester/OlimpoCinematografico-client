@@ -5,8 +5,10 @@ import Slider from "react-slick";
 import placeholder from "../assets/placeholder.svg";
 import Stars from "./ReviewRatingStars";
 import service from "../service/service.config";
+import { useNavigate } from "react-router-dom";
 
 function MovieDetails({ movie, settings, review, isAdmin, reviewId }) {
+  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [reviewText, setReviewText] = useState(review.text);
   const handleEdit = () => {
@@ -20,6 +22,14 @@ function MovieDetails({ movie, settings, review, isAdmin, reviewId }) {
   };
   const handleChange = (e) => {
     setReviewText(e.target.value);
+  };
+  const handleDeleteBtn = async () => {
+    try {
+      await service.delete(`/reviews/${reviewId}`);
+      navigate("/reviews");
+    } catch (error) {
+      setError("Can not delete this");
+    }
   };
   return (
     <div className="movie-details">
@@ -71,15 +81,16 @@ function MovieDetails({ movie, settings, review, isAdmin, reviewId }) {
       </div>
       <div>
         {isAdmin && !isEditing && (
-          <>
+          <div className="delete-edit">
             <button onClick={handleEdit}>✏️</button>
-          </>
+            <button onClick={handleDeleteBtn}> ❌Borrar publicación</button>
+          </div>
         )}
         {isAdmin && isEditing && (
-          <>
+          <div>
             <button onClick={handleSave}>Guardar</button>
             <button onClick={() => setIsEditing(false)}>Cancelar</button>
-          </>
+          </div>
         )}
       </div>
     </div>
