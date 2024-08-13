@@ -57,7 +57,8 @@ function LastReview() {
   return (
     <div>
       {movieData && (
-        <div>
+        <div className="last-review">
+          <h1>Mi ultima publicación</h1>
           <h2>{movieData.title}</h2>
           <p>{movieData.overview}</p>
           <Link to={`/reviews/${reviewId}`}>

@@ -7,6 +7,7 @@ import { AuthContext } from "../context/auth.context";
 import MovieDetails from "../components/MovieDetails";
 import Comments from "../components/Comments";
 import CommentForm from "../components/CommentForm";
+import Footer from "../components/Footers";
 
 function ReviewDetails() {
   const { reviewId } = useParams();
@@ -107,6 +108,10 @@ function ReviewDetails() {
         handleDeleteComment={handleDeleteComment}
       />
       <CommentForm reviewId={reviewId} onCommentAdded={addComment} />
+      <br />
+      <br />
+      <hr />
+      <Footer />
     </div>
   );
 }
