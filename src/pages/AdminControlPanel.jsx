@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import service from "../service/service.config";
+import logo from "../assets/user.png";
+import Pagination from "../components/pagination";
 
 function AdminControlPanel() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 10;
 
   useEffect(() => {
     const getUsers = async () => {
       try {
         const allUsers = await service.get("/users");
-        console.log(allUsers.data);
         setUsers(allUsers.data);
       } catch (error) {
-        console.log(error);
+        console.log("Failed to load users:", error);
       } finally {
         setLoading(false);
       }
@@ -20,6 +23,34 @@ function AdminControlPanel() {
 
     getUsers();
   }, []);
+  console.log(users);
+  // Pagination calc
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  const totalPages = Math.ceil(users.length / usersPerPage);
+
+  const handleDelete = async (userId) => {
+    try {
+      await service.delete(`/users/${userId}`);
+      setUsers(users.filter((user) => user._id !== userId));
+    } catch (error) {
+      console.log("Failed to delete user:", error);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -30,16 +61,29 @@ function AdminControlPanel() {
   }
 
   return (
-    <div>
-      {users.map((user, i) => {
-        return (
-          <div key={i} className="user-card">
-            <p>Email:{user.email}</p>
-            <p>Nombre:{user.name[0].toUpperCase() + user.name.slice(1)}</p>
-            <p>Rol:{user.role}</p>
+    <div className="page-container">
+      {currentUsers.map((user, i) => (
+        <div key={i} className="user-card">
+          <div>
+            <p>📧 {user.email}</p>
+            <p>👤 {user.name[0].toUpperCase() + user.name.slice(1)}</p>
+            <p>📋 {user.role}</p>
           </div>
-        );
-      })}
+          <div>
+            {user.role !== "admin" && (
+              <button onClick={() => handleDelete(user._id)}>❌ </button>
+            )}
+
+            <img src={logo} alt="logo" width={120} />
+          </div>
+        </div>
+      ))}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onNext={handleNextPage}
+        onPrevious={handlePreviousPage}
+      />
     </div>
   );
 }

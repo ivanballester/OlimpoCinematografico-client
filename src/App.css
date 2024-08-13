@@ -2,7 +2,10 @@
   margin: 0 15px;
   background-color: #242424;
 }
-
+body,
+html {
+  height: 100%;
+}
 .signup-inputs {
   display: flex;
   flex-direction: column;
@@ -160,8 +163,35 @@
 .user-card {
   border: yellowgreen 1px solid;
   border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 2vh;
 }
 .user-card p {
   display: flex;
   justify-content: space-between;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  position: fixed;
+  bottom: 0;
+}
+
+.pagination button {
+  margin: 0 10px;
+  padding: 4px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.pagination span {
+  font-size: 16px;
+}
+.page-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
