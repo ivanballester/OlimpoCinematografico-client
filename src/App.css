@@ -283,3 +283,8 @@ html {
     font-size: 10px;
   }
 }
+.popular-movies {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

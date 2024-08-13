@@ -38,7 +38,9 @@ function PopularMovies() {
 
   return (
     <div>
-      <h2>Peliculas más populares</h2>
+      <h2 style={{ color: "lightblue", textAlign: "center" }}>
+        Peliculas más populares
+      </h2>
       <div>
         <Slider {...settings}>
           {movies.map((movie) => {
