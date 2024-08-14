@@ -22,7 +22,9 @@ export default function Navbar() {
   };
 
   const handleProfilePage = () => {
-    setIsOpen(!isOpen);
+    if (isOpen) {
+      setIsOpen(false);
+    }
     navigate("/profile");
   };
   console.log(isLoggedIn);
