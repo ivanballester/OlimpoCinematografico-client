@@ -18,6 +18,8 @@ html {
 }
 .nav-img {
   border-radius: 50px;
+  display: flex;
+  justify-content: center;
 }
 
 /* Abre navbar menu */
@@ -26,9 +28,11 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 3px;
   background-color: #a18d6e;
   color: #fff;
+  position: sticky;
+  top: 0;
 }
 
 .navbar .brand {
@@ -329,4 +333,18 @@ html {
 }
 .movie-poster2 {
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.lastReview-img {
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+.name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+.about-me {
+  text-align: justify;
 }

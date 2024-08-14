@@ -80,9 +80,8 @@ function ReviewsPage() {
         </div>
         <br />
         <br />
-        <hr />
       </div>
-      <Footer />;
+      <Footer />
     </div>
   );
 }

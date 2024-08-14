@@ -11,6 +11,9 @@ import ReviewDetails from "./pages/ReviewDetails";
 
 import Navbar from "./components/Navbar";
 import Admin from "./components/Auth/Admin";
+import AboutPage from "./pages/AboutPage";
+import ErrorPage from "./pages/ErrorPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
       <br />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/aboutme" element={<AboutPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reviews" element={<ReviewsPage />} />
@@ -40,7 +44,8 @@ function App() {
           }
         />
 
-        {/* error FE routes here... */}
+        <Route path="/error" element={<ErrorPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );

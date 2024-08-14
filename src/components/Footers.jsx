@@ -14,7 +14,9 @@ function Footer() {
           <p>📌 03008 Alicante, España</p>
         </div>
         <div className="footer-section">
-          <h4 style={{ marginBottom: "20px" }}>Síguenos</h4>
+          <h4 style={{ marginBottom: "20px", textAlign: "center" }}>
+            Síguenos
+          </h4>
           <div className="social-icons">
             <a href="https://facebook.com" target="_blank" rel="noreferrer">
               <img src={f} alt="" width={30} />

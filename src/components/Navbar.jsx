@@ -80,6 +80,9 @@ export default function Navbar() {
               <h4> ⊹ CERRAR SESIÓN </h4>
             </Link>
           )}
+          <Link to="/aboutme" className="menu-item" onClick={handleToggleMenu}>
+            <h4>⊹ SOBRE MI</h4>
+          </Link>
         </div>
       )}
     </nav>
