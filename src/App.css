@@ -33,6 +33,7 @@ html {
   color: #fff;
   position: sticky;
   top: 0;
+  z-index: 1000;
 }
 
 .navbar .brand {
@@ -347,4 +348,12 @@ html {
 }
 .about-me {
   text-align: justify;
+}
+.slick-slider {
+  position: relative;
+  z-index: 100;
+}
+.slide-container {
+  position: relative;
+  z-index: 200;
 }

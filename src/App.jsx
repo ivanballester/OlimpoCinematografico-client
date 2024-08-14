@@ -8,12 +8,13 @@ import AdminControlPanel from "./pages/AdminControlPanel";
 import ReviewsPage from "./pages/ReviewsPage";
 import ReviewAdd from "./pages/ReviewAdd";
 import ReviewDetails from "./pages/ReviewDetails";
-
-import Navbar from "./components/Navbar";
-import Admin from "./components/Auth/Admin";
 import AboutPage from "./pages/AboutPage";
 import ErrorPage from "./pages/ErrorPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ProfilePage from "./pages/ProfilePage";
+
+import Navbar from "./components/Navbar";
+import Admin from "./components/Auth/Admin";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/reviews/:reviewId" element={<ReviewDetails />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route
           path="/admin/control-panel"
           element={

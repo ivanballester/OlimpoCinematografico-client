@@ -4,10 +4,12 @@ import { AuthContext } from "../context/auth.context";
 import logo from "../assets/logo.jpg";
 import logout from "../assets/logout.png";
 import menu from "../assets/menu.png";
+import profile from "../assets/user.png";
 
 export default function Navbar() {
   const { isLoggedIn, authenticateUser, isAdmin } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleToggleMenu = () => {
     setIsOpen(!isOpen);
@@ -16,8 +18,13 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     authenticateUser();
+    setIsOpen(!isOpen);
   };
 
+  const handleProfilePage = () => {
+    setIsOpen(!isOpen);
+    navigate("/profile");
+  };
   console.log(isLoggedIn);
 
   return (
@@ -33,7 +40,12 @@ export default function Navbar() {
         <img src={logo} alt="logo" width={80} className="nav-img" />
       </Link>
       {isLoggedIn && (
-        <img src={logout} alt="logout" width={30} onClick={handleLogout} />
+        <img
+          src={profile}
+          alt="profile"
+          width={50}
+          onClick={handleProfilePage}
+        />
       )}
       {isOpen && (
         <div className="menu">
@@ -48,13 +60,8 @@ export default function Navbar() {
           </Link>
 
           {!isLoggedIn && (
-            <Link to="/signup" className="menu-item" onClick={handleToggleMenu}>
-              <h4>⊹ HOME</h4>
-            </Link>
-          )}
-          {!isLoggedIn && (
             <Link to="/login" className="menu-item" onClick={handleToggleMenu}>
-              <h4> ⊹ INICIAR SESIÓN ⊹</h4>
+              <h4> ⊹ INICIAR SESIÓN </h4>
             </Link>
           )}
           {isAdmin && (
@@ -76,12 +83,12 @@ export default function Navbar() {
             </Link>
           )}
           {isLoggedIn && (
-            <Link to="/login" className="menu-item" onClick={handleToggleMenu}>
+            <Link to="/login" className="menu-item" onClick={handleLogout}>
               <h4> ⊹ CERRAR SESIÓN </h4>
             </Link>
           )}
           <Link to="/aboutme" className="menu-item" onClick={handleToggleMenu}>
-            <h4>⊹ SOBRE MI</h4>
+            <h4>⊹ SOBRE MÍ</h4>
           </Link>
         </div>
       )}

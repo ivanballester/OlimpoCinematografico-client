@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import service from "../../service/service.config";
 
@@ -23,7 +23,6 @@ function Login() {
       password,
     };
 
-    // ... contactar al backend para validar credenciales de usuario aqui
     try {
       const response = await service.post("/auth/login", userCredentials);
       console.log(response);
@@ -37,14 +36,14 @@ function Login() {
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage);
       } else {
-        // aqui deberiamos hacer un navigate a pagina de error si hay fallo del servidor
+        navigate("/error");
       }
     }
   };
 
   return (
     <div>
-      <h1>INICIAR SESION</h1>
+      <h1>INICIAR SESIÓN</h1>
       <div>
         <form onSubmit={handleLogin}>
           <div className="signup-inputs">
@@ -67,9 +66,13 @@ function Login() {
             />
           </div>
           <br />
-
           <button type="submit">Acceder</button>
-
+          <div style={{ textAlign: "center" }}>
+            <p> ¿No tienes cuenta?</p>
+            <Link to={"/signup"} style={{ color: "black" }}>
+              Regístrate aquí
+            </Link>
+          </div>
           {errorMessage && <p>{errorMessage}</p>}
         </form>
       </div>
