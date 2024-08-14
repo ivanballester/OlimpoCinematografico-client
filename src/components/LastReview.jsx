@@ -58,8 +58,8 @@ function LastReview() {
     <div>
       {movieData && (
         <div className="last-review">
-          <h1 style={{ color: "lightblue" }}>Mi ultima publicación</h1>
-          <h2>{movieData.title}</h2>
+          <h1 className="homepage-title">MI ÚLTIMA PUBLICACIÓN</h1>
+          <h2 className="homepage-title2">{movieData.title}</h2>
           <p>{movieData.overview}</p>
           <Link to={`/reviews/${reviewId}`}>
             <img

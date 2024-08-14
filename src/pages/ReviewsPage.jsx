@@ -56,13 +56,13 @@ function ReviewsPage() {
   return (
     <div>
       <div className="reviews-page">
-        <h1>PELICULAS</h1>
+        <h1 className="homepage-title">PELÍCULAS</h1>
         <div className="movies-container">
           {movieDetails.length > 0 ? (
             movieDetails.map((movie) => (
               <div key={movie.movieId} className="movie-card">
                 <div className="movie-info">
-                  <h2>{movie.title}</h2>
+                  <h2 className="homepage-title2">{movie.title}</h2>
                   <Link to={`/reviews/${movie.reviewId}`}>
                     <img
                       src={`https://image.tmdb.org/t/p/w200${movie.posterPath}`}

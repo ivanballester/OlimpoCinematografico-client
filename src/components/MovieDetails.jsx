@@ -34,18 +34,23 @@ function MovieDetails({ movie, settings, review, isAdmin, reviewId }) {
   return (
     <div className="movie-details">
       <div className="title-sinopsis">
-        <h1 className="details-title">{movie.title}</h1>
+        <h1
+          className="homepage-title2"
+          style={{ fontSize: "1.7rem", marginBottom: "15px" }}
+        >
+          {movie.title}
+        </h1>
         <img
           src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
           alt={movie.title}
           className="movie-poster2"
         />
-        <p>
-          <strong>Sinopsis</strong>
-        </p>
-        {movie.overview}
+        <h2 className="title-details" style={{ marginBottom: "0" }}>
+          Sinopsis
+        </h2>
+        <p className="overview">{movie.overview}</p>
       </div>
-      <h2>Reparto</h2>
+      <h2 className="title-details">Reparto</h2>
       <Slider {...settings}>
         {movie.credits.cast.map((actor) => (
           <div key={actor.id} className="actor-card">
@@ -66,7 +71,8 @@ function MovieDetails({ movie, settings, review, isAdmin, reviewId }) {
         ))}
       </Slider>
       <div className="personal-review">
-        <strong>Mi crítica personal</strong>
+        <span style={{ fontWeight: "bold" }}>Mi crítica personal</span>
+
         <Stars review={review} />
         {isEditing ? (
           <textarea
@@ -76,20 +82,29 @@ function MovieDetails({ movie, settings, review, isAdmin, reviewId }) {
             cols="50"
           />
         ) : (
-          <p>{reviewText}</p>
+          <p style={{ textAlign: "justify" }}>{reviewText}</p>
         )}
       </div>
       <div>
         {isAdmin && !isEditing && (
           <div className="delete-edit">
-            <button onClick={handleEdit}>✏️</button>
-            <button onClick={handleDeleteBtn}> ❌Borrar publicación</button>
+            <button onClick={handleEdit} className="detailsBtn">
+              ✏️
+            </button>
+            <button onClick={handleDeleteBtn} className="detailsBtn">
+              {" "}
+              ❌Borrar publicación
+            </button>
           </div>
         )}
         {isAdmin && isEditing && (
           <div>
-            <button onClick={handleSave}>Guardar</button>
-            <button onClick={() => setIsEditing(false)}>Cancelar</button>
+            <button onClick={handleSave} className="detailsBtn">
+              Guardar
+            </button>
+            <button onClick={() => setIsEditing(false)} className="detailsBtn">
+              Cancelar
+            </button>
           </div>
         )}
       </div>

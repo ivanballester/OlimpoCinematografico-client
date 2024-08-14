@@ -38,20 +38,23 @@ export default function Navbar() {
       {isOpen && (
         <div className="menu">
           <button onClick={handleToggleMenu} className="close-button">
-            X
+            ✘
           </button>
+          <Link to="/" className="menu-item" onClick={handleToggleMenu}>
+            <h4>⊹ PÁGINA PRINCIPAL</h4>
+          </Link>
           <Link to="/reviews" className="menu-item" onClick={handleToggleMenu}>
-            <h4>Peliculas</h4>
+            <h4>⊹ PELÍCULAS</h4>
           </Link>
 
           {!isLoggedIn && (
             <Link to="/signup" className="menu-item" onClick={handleToggleMenu}>
-              <h4>Registrarse</h4>
+              <h4>⊹ HOME</h4>
             </Link>
           )}
           {!isLoggedIn && (
             <Link to="/login" className="menu-item" onClick={handleToggleMenu}>
-              <h4>Iniciar sesion</h4>
+              <h4> ⊹ INICIAR SESIÓN ⊹</h4>
             </Link>
           )}
           {isAdmin && (
@@ -60,7 +63,7 @@ export default function Navbar() {
               className="menu-item"
               onClick={handleToggleMenu}
             >
-              Panel de control
+              <h4> ⊹ USUARIOS</h4>
             </Link>
           )}
           {isAdmin && (
@@ -69,7 +72,12 @@ export default function Navbar() {
               className="menu-item"
               onClick={handleToggleMenu}
             >
-              Añadir critica
+              <h4> ⊹ NUEVA CRÍTICA</h4>
+            </Link>
+          )}
+          {isLoggedIn && (
+            <Link to="/login" className="menu-item" onClick={handleToggleMenu}>
+              <h4> ⊹ CERRAR SESIÓN </h4>
             </Link>
           )}
         </div>

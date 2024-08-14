@@ -101,16 +101,19 @@ function ReviewDetails() {
         isAdmin={isAdmin}
         reviewId={reviewId}
       />
+      <hr />
       <Comments
         comments={comments}
         user={user}
         isAdmin={isAdmin}
         handleDeleteComment={handleDeleteComment}
       />
+      <br />
+
       <CommentForm reviewId={reviewId} onCommentAdded={addComment} />
       <br />
       <br />
-      <hr />
+
       <Footer />
     </div>
   );

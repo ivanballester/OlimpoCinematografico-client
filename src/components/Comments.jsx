@@ -4,7 +4,7 @@ import Stars from "./ReviewRatingStars";
 function Comments({ comments, user, isAdmin, handleDeleteComment }) {
   return (
     <div>
-      <h3>Comentarios</h3>
+      <h3 style={{ marginBottom: "16px" }}>Comentarios</h3>
       {comments.map((comment, index) => (
         <div key={index} className="comment">
           <p
@@ -19,9 +19,22 @@ function Comments({ comments, user, isAdmin, handleDeleteComment }) {
             </span>
           </p>
 
-          <p style={{ marginTop: "0", marginBottom: "5px" }}>{comment.text}</p>
+          <p
+            style={{
+              marginTop: "0",
+              marginBottom: "5px",
+              textAlign: "justify",
+            }}
+          >
+            {comment.text}
+          </p>
           {(comment.creator?._id === user || isAdmin) && (
-            <button onClick={() => handleDeleteComment(comment._id)}>🗑️</button>
+            <button
+              onClick={() => handleDeleteComment(comment._id)}
+              className="detailsBtn"
+            >
+              🗑️
+            </button>
           )}
         </div>
       ))}

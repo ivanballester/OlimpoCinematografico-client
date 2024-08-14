@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import service from "../service/service.config";
 import logo from "../assets/user.png";
 import Pagination from "../components/pagination";
+import user1 from "../assets/user1.png";
 
 function AdminControlPanel() {
   const [users, setUsers] = useState([]);
@@ -66,15 +67,19 @@ function AdminControlPanel() {
         <div key={i} className="user-card">
           <div>
             <p>📧 {user.email}</p>
-            <p>👤 {user.name[0].toUpperCase() + user.name.slice(1)}</p>
+            <p>🧑🏻‍💻 {user.name[0].toUpperCase() + user.name.slice(1)}</p>
             <p>📋 {user.role}</p>
           </div>
-          <div>
+          <div className="user1">
+            <img src={user1} alt="logo" width={100} />
             {user.role !== "admin" && (
-              <button onClick={() => handleDelete(user._id)}>❌ </button>
+              <button
+                onClick={() => handleDelete(user._id)}
+                style={{ backgroundColor: "rgb(165, 137, 103)" }}
+              >
+                🗑️
+              </button>
             )}
-
-            <img src={logo} alt="logo" width={120} />
           </div>
         </div>
       ))}

@@ -78,7 +78,8 @@ function SearchBar() {
         type="text"
         value={query}
         onChange={handleChange}
-        placeholder="Search for movies..."
+        placeholder="Buscar peliculas..."
+        style={{ backgroundColor: "rgb(249, 207, 120)", color: "black" }}
       />
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
@@ -101,13 +102,18 @@ function SearchBar() {
               </li>
             ))
           ) : (
-            <li>No movies found</li>
+            <li>No hay peliculas</li>
           )}
         </ul>
       )}
       {posterUrl && (
         <div className="movie-poster">
-          <img src={posterUrl} alt="Selected Movie Poster" />
+          <img
+            src={posterUrl}
+            alt="Selected Movie Poster"
+            height={300}
+            width={200}
+          />
         </div>
       )}
       {showForm && (
@@ -122,6 +128,7 @@ function SearchBar() {
               min="1"
               max="5"
               required
+              style={{ backgroundColor: "rgb(85, 144, 149)" }}
             />
           </div>
           <div className="review">
@@ -131,9 +138,15 @@ function SearchBar() {
               value={text}
               onChange={(e) => setText(e.target.value)}
               required
+              style={{ backgroundColor: "rgb(249, 207, 120)", color: "black" }}
             />
           </div>
-          <button type="submit">Subir critica</button>
+          <button
+            type="submit"
+            style={{ backgroundColor: "rgb(165, 137, 103)" }}
+          >
+            Subir crítica
+          </button>
           {error && <p style={{ color: "red" }}>{error}</p>}
           {/* Display error if any */}
         </form>
@@ -146,7 +159,9 @@ function SearchBar() {
             posterPath: selectedMovie.poster_path,
           }}
         >
-          <button>View Details</button>
+          <button style={{ backgroundColor: "rgb(165, 137, 103)" }}>
+            Ver detalles
+          </button>
         </Link>
       )}
     </div>

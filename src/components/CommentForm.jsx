@@ -34,10 +34,14 @@ function CommentForm({ reviewId, onCommentAdded }) {
       {error && <p className="error">{error}</p>}
       <div>
         <label>
-          Rating
+          Puntuación
           <select
             value={rating}
             onChange={(e) => setRating(Number(e.target.value))}
+            style={{
+              backgroundColor: "#559095",
+              marginLeft: "10px",
+            }}
           >
             {options.map((r) => (
               <option key={r} value={r}>
@@ -53,10 +57,13 @@ function CommentForm({ reviewId, onCommentAdded }) {
             value={text}
             onChange={(e) => setText(e.target.value)}
             required
+            style={{ backgroundColor: "#F9CF78", color: "black" }}
           />
         </label>
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" className="detailsBtn">
+        ↪
+      </button>
     </form>
   ) : (
     <h4> Registrate para poder crear comentarios </h4>
