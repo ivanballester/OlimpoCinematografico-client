@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import user from "../assets/user.png";
 import service from "../service/service.config";
+import edit from "../assets/edit.png";
+import { useNavigate } from "react-router-dom";
 
 function ProfilePage() {
   const [email, setEmail] = useState("");
@@ -9,6 +11,8 @@ function ProfilePage() {
   const [photo, setPhoto] = useState(user);
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,9 +37,16 @@ function ProfilePage() {
     try {
       await service.patch("/profile", { name, phoneNumber, city });
       alert("Datos guardads con exito");
+      navigate("/");
     } catch (error) {
       console.log(error);
       alert("Error al guardar los datos");
+    }
+  };
+
+  const handlePhoneNumber = (e) => {
+    if (/^\d*$/.test(e.target.value)) {
+      setPhoneNumber(e.target.value.slice(0, 9));
     }
   };
 
@@ -45,7 +56,11 @@ function ProfilePage() {
 
   return (
     <div className="profile-div">
-      <img src={user} alt="foto" width={300} />
+      <div>
+        <img src={user} alt="foto" width={300} />
+        <img src={edit} alt="edit" width={40} className="edit-button" />
+      </div>
+
       <div>
         <form action="" className="profile-form">
           <label htmlFor="">
@@ -72,7 +87,7 @@ function ProfilePage() {
               type="text"
               className="profile-input"
               value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              onChange={handlePhoneNumber}
             />
           </label>
           <label htmlFor="">

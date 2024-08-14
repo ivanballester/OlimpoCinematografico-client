@@ -84,14 +84,14 @@ export default function Navbar() {
               <h4> ⊹ NUEVA CRÍTICA</h4>
             </Link>
           )}
+          <Link to="/aboutme" className="menu-item" onClick={handleToggleMenu}>
+            <h4>⊹ SOBRE NOSOTROS</h4>
+          </Link>
           {isLoggedIn && (
             <Link to="/login" className="menu-item" onClick={handleLogout}>
               <h4> ⊹ CERRAR SESIÓN </h4>
             </Link>
           )}
-          <Link to="/aboutme" className="menu-item" onClick={handleToggleMenu}>
-            <h4>⊹ SOBRE MÍ</h4>
-          </Link>
         </div>
       )}
     </nav>

@@ -380,7 +380,7 @@ html {
   flex-direction: column;
   border-color: #9c1b6b;
   border: 1px solid;
-  border-radius: 10px;
+
   margin: 20px;
   padding: 20px;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
@@ -388,7 +388,11 @@ html {
 .profile-save {
   width: 50%;
   height: 40px;
-  background-color: antiquewhite;
+  background-color: lightskyblue;
   color: #444;
   border-radius: 8px;
+}
+.edit-button {
+  position: absolute;
+  right: 80px;
 }
