@@ -24,11 +24,19 @@ function MovieDetails({ movie, settings, review, isAdmin, reviewId }) {
     setReviewText(e.target.value);
   };
   const handleDeleteBtn = async () => {
-    try {
-      await service.delete(`/reviews/${reviewId}`);
-      navigate("/reviews");
-    } catch (error) {
-      setError("Can not delete this");
+    const confirmDelete = window.confirm(
+      "¿Estás seguro de que deseas borrar esta reseña?"
+    );
+
+    if (confirmDelete) {
+      try {
+        await service.delete(`/reviews/${reviewId}`);
+        navigate("/reviews");
+      } catch (error) {
+        setError("No se puede borrar esta reseña");
+      }
+    } else {
+      console.log("Eliminación cancelada por el usuario.");
     }
   };
   return (
@@ -92,7 +100,6 @@ function MovieDetails({ movie, settings, review, isAdmin, reviewId }) {
               ✏️
             </button>
             <button onClick={handleDeleteBtn} className="detailsBtn">
-              {" "}
               ❌Borrar publicación
             </button>
           </div>
