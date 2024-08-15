@@ -7,7 +7,7 @@ import Upcoming from "../components/UpcomingMovies";
 
 function HomePage() {
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <img src={portada} alt="" width={"100%"} />
       <hr />
       <div>

@@ -24,26 +24,53 @@ function Upcoming() {
   // Carousel settings
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
     autoplay: true,
     autoplaySpeed: 3000,
     pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   if (!movies) {
     return <p>Loading...</p>;
   }
 
   return (
-    <div>
-      <h1 className="homepage-title">PRONTO...</h1>
+    <div style={{ textAlign: "center" }}>
+      <h1 className="homepage-title">PRONTO EN CINES</h1>
       <div>
         <Slider {...settings}>
           {movies.map((movie) => {
             return (
-              <div key={movie.id} className="movie-card">
+              <div key={movie.id} className="card">
                 <img
                   src={
                     movie.poster_path

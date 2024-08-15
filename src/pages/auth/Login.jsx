@@ -41,40 +41,39 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>INICIAR SESIÓN</h1>
-      <div>
-        <form onSubmit={handleLogin}>
-          <div className="signup-inputs">
-            <label>E-mail</label>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={handleEmailChange}
-            />
-          </div>
-          <br />
-          <div className="signup-inputs">
-            <label>Contraseña</label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-          </div>
-          <br />
-          <button type="submit">Acceder</button>
-          <div style={{ textAlign: "center" }}>
-            <p> ¿No tienes cuenta?</p>
-            <Link to={"/signup"} style={{ color: "black" }}>
-              Regístrate aquí
-            </Link>
-          </div>
-          {errorMessage && <p>{errorMessage}</p>}
-        </form>
-      </div>
+    <div className="signup-form">
+      <h1 style={{ textAlign: "center" }}>INICIAR SESIÓN</h1>
+
+      <form onSubmit={handleLogin}>
+        <div className="signup-inputs">
+          <label>E-mail</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </div>
+        <br />
+        <div className="signup-inputs">
+          <label>Contraseña</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <br />
+        <button type="submit">Acceder</button>
+        <div style={{ textAlign: "center" }}>
+          <p> ¿No tienes cuenta?</p>
+          <Link to={"/signup"} style={{ color: "black" }}>
+            Regístrate aquí
+          </Link>
+        </div>
+        {errorMessage && <p>{errorMessage}</p>}
+      </form>
     </div>
   );
 }

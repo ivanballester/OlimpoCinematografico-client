@@ -76,7 +76,7 @@ function ReviewsPage() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <div className="reviews-page">
         <h1 className="homepage-title">PELÍCULAS</h1>
         <input
@@ -90,17 +90,15 @@ function ReviewsPage() {
           {currentMovies.length > 0 ? (
             currentMovies.map((movie) => (
               <div key={movie.movieId} className="movie-card">
-                <div className="movie-info">
-                  <h2 className="homepage-title2">{movie.title}</h2>
-                  <Link to={`/reviews/${movie.reviewId}`}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w300${movie.posterPath}`}
-                      alt={movie.title}
-                      className="movie-poster"
-                      style={{ cursor: "pointer" }}
-                    />
-                  </Link>
-                </div>
+                <h2 className="homepage-title2">{movie.title}</h2>
+                <Link to={`/reviews/${movie.reviewId}`}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w300${movie.posterPath}`}
+                    alt={movie.title}
+                    className="movie-poster"
+                    style={{ cursor: "pointer" }}
+                  />
+                </Link>
               </div>
             ))
           ) : (

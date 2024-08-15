@@ -57,7 +57,11 @@ function CommentForm({ reviewId, onCommentAdded }) {
             value={text}
             onChange={(e) => setText(e.target.value)}
             required
-            style={{ backgroundColor: "#F9CF78", color: "black" }}
+            style={{
+              backgroundColor: "#F9CF78",
+              color: "black",
+              width: "100%",
+            }}
           />
         </label>
       </div>

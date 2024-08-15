@@ -53,57 +53,57 @@ function Signup() {
   };
 
   return (
-    <div>
-      <h1>REGISTRO</h1>
-      <div>
-        <form onSubmit={handleSignup}>
-          <div className="signup-inputs">
-            <label>E-mail</label>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={handleEmailChange}
-            />
-          </div>
-          <br />
-          <div className="signup-inputs">
-            <label>Nombre</label>
+    <div className="signup-form">
+      <h1 style={{ textAlign: "center" }}>REGISTRO</h1>
+      <form onSubmit={handleSignup}>
+        <div className="signup-inputs">
+          <label>E-mail</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </div>
+        <br />
+        <div className="signup-inputs">
+          <label>Nombre</label>
 
-            <input
-              type="text"
-              name="Name"
-              value={name}
-              onChange={handleNameChange}
-            />
-          </div>
-          <br />
-          <div className="signup-inputs">
-            <label>Contraseña</label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-          </div>
-          <br />
-          <div className="signup-inputs">
-            <label>Repetir contraseña</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={confirmPassword}
-              onChange={handleconfirmPasswordChange}
-            />
-          </div>
-          <br />
+          <input
+            type="text"
+            name="Name"
+            value={name}
+            onChange={handleNameChange}
+          />
+        </div>
+        <br />
+        <div className="signup-inputs">
+          <label>Contraseña</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <br />
+        <div className="signup-inputs">
+          <label>Repetir contraseña</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            value={confirmPassword}
+            onChange={handleconfirmPasswordChange}
+          />
+        </div>
+        <br />
 
-          <button type="submit">Registrar</button>
+        <button type="submit" className="signup-login-button">
+          Registrar
+        </button>
 
-          {error && <p>{error}</p>}
-        </form>
-      </div>
+        {error && <p>{error}</p>}
+      </form>
     </div>
   );
 }
