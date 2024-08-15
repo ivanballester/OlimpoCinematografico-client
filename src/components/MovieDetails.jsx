@@ -35,8 +35,6 @@ function MovieDetails({ movie, settings, review, isAdmin, reviewId }) {
       } catch (error) {
         setError("No se puede borrar esta reseña");
       }
-    } else {
-      console.log("Eliminación cancelada por el usuario.");
     }
   };
   return (

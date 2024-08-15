@@ -10,8 +10,6 @@ function AuthProviderWrapper(props) {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const authenticateUser = async () => {
-    console.log("intentando validar el token");
-
     const authToken = localStorage.getItem("authToken");
 
     if (!authToken) {
@@ -24,7 +22,7 @@ function AuthProviderWrapper(props) {
 
     try {
       const response = await service.get("/auth/verify");
-      console.log(response);
+
       setIsLoggedIn(true);
       setIsLoading(false);
       setUser(response.data._id);

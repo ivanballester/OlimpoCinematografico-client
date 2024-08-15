@@ -18,7 +18,6 @@ function ReviewsPage() {
       try {
         const reviewsResponse = await service.get(`/reviews`);
         const reviewsData = reviewsResponse.data;
-        console.log(reviewsData);
 
         const movieDetailsArray = await Promise.all(
           reviewsData.map(async (review) => {
@@ -39,7 +38,7 @@ function ReviewsPage() {
             };
           })
         );
-        console.log(movieDetailsArray);
+
         setMovieDetails(movieDetailsArray);
       } catch (error) {
         setError("An error occurred while fetching data.");

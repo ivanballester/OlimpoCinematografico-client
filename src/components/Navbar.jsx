@@ -27,7 +27,6 @@ export default function Navbar() {
     }
     navigate("/profile");
   };
-  console.log(isLoggedIn);
 
   return (
     <nav className="navbar">

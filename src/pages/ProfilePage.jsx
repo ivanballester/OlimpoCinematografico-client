@@ -19,7 +19,7 @@ function ProfilePage() {
       try {
         const response = await service.get("/profile");
         const data = response.data;
-        console.log(response);
+
         setEmail(data.email);
         setName(data.name);
         setPhoneNumber(data.phoneNumber);

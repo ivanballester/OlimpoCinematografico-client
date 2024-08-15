@@ -15,7 +15,7 @@ function Upcoming() {
     try {
       const response = await tmdbService.get("/movie/upcoming?language=es-ES");
       const movieList = response.data.results;
-      console.log(movieList);
+
       setMovies(movieList);
     } catch (error) {
       console.log(error);

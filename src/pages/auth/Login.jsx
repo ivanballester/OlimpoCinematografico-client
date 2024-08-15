@@ -25,7 +25,6 @@ function Login() {
 
     try {
       const response = await service.post("/auth/login", userCredentials);
-      console.log(response);
 
       localStorage.setItem("authToken", response.data.authToken);
 

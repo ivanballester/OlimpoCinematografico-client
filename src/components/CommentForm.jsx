@@ -18,7 +18,7 @@ function CommentForm({ reviewId, onCommentAdded }) {
         text,
         rating,
       });
-      console.log(response);
+
       onCommentAdded(response.data.comments);
       setText("");
       setRating(1);

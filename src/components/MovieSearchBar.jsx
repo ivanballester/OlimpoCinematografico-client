@@ -25,7 +25,7 @@ function SearchBar() {
 
     try {
       const results = await searchMovies(query);
-      console.log("Movies Results:", results);
+
       setMovies(Array.isArray(results) ? results : []); // Ensure results is an array
     } catch (error) {
       console.error("Error in debouncedSearch:", error);

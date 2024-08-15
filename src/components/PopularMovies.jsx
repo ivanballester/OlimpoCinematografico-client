@@ -15,7 +15,7 @@ function PopularMovies() {
     try {
       const response = await tmdbService.get("/movie/popular?language=es-ES");
       const movieList = response.data.results;
-      console.log(movieList);
+
       setMovies(movieList);
     } catch (error) {
       console.log(error);

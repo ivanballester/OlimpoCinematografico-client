@@ -24,7 +24,7 @@ function AdminControlPanel() {
 
     getUsers();
   }, []);
-  console.log(users);
+
   // Pagination calc
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
