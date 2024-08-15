@@ -58,7 +58,7 @@ export default function Navbar() {
             <h4>⊹ PÁGINA PRINCIPAL</h4>
           </Link>
           <Link to="/reviews" className="menu-item" onClick={handleToggleMenu}>
-            <h4>⊹ PELÍCULAS</h4>
+            <h4>⊹ REVIEWS</h4>
           </Link>
 
           {!isLoggedIn && (
@@ -81,7 +81,7 @@ export default function Navbar() {
               className="menu-item"
               onClick={handleToggleMenu}
             >
-              <h4> ⊹ NUEVA CRÍTICA</h4>
+              <h4> ⊹ NUEVA REVIEW</h4>
             </Link>
           )}
           <Link to="/aboutme" className="menu-item" onClick={handleToggleMenu}>

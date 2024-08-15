@@ -156,7 +156,7 @@ html {
   display: flex;
   justify-content: center;
   margin: 20px 0;
-  position: fixed;
+  position: static;
   bottom: 0;
 }
 
@@ -180,13 +180,20 @@ html {
 
 .title-sinopsis,
 .reviews-page,
-.movie-info,
 .personal-review,
 .last-review {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.movie-info {
+  margin: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
 }
 
 .popular-movies {
@@ -204,7 +211,7 @@ html {
 
 .homepage-title {
   color: #3e7589;
-  font-size: 3vh;
+  font-size: 4vh;
   text-align: center;
 }
 

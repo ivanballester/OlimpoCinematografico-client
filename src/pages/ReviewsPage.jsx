@@ -3,22 +3,22 @@ import { Link } from "react-router-dom";
 import service from "../service/service.config";
 import tmdbservice from "../service/serviceTMDB";
 import Footer from "../components/Footers";
+import Pagination from "../components/pagination";
 
 function ReviewsPage() {
   const [movieDetails, setMovieDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const moviesPerPage = 10;
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        // Fetch reviews from the backend
-
         const reviewsResponse = await service.get(`/reviews`);
         const reviewsData = reviewsResponse.data;
         console.log(reviewsData);
 
-        // Extract movieIds and reviewIds
         const movieDetailsArray = await Promise.all(
           reviewsData.map(async (review) => {
             const movieResponse = await tmdbservice.get(
@@ -48,7 +48,23 @@ function ReviewsPage() {
 
     fetchMovies();
   }, []);
-  console.log(movieDetails);
+
+  //Pagination calc
+  const indexOfLastUser = currentPage * moviesPerPage;
+  const indexOfFirstUser = indexOfLastUser - moviesPerPage;
+  const currentMovies = movieDetails.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(movieDetails.length / moviesPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -58,8 +74,8 @@ function ReviewsPage() {
       <div className="reviews-page">
         <h1 className="homepage-title">PELÍCULAS</h1>
         <div className="movies-container">
-          {movieDetails.length > 0 ? (
-            movieDetails.map((movie) => (
+          {currentMovies.length > 0 ? (
+            currentMovies.map((movie) => (
               <div key={movie.movieId} className="movie-card">
                 <div className="movie-info">
                   <h2 className="homepage-title2">{movie.title}</h2>
@@ -78,6 +94,12 @@ function ReviewsPage() {
             <div>No hay peliculas aun...</div>
           )}
         </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onNext={handleNextPage}
+          onPrevious={handlePreviousPage}
+        />
         <br />
         <br />
       </div>
