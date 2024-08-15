@@ -1,6 +1,6 @@
 import React from "react";
 import foto from "../assets/foto.png";
-import logo1 from "../assets/linkedin.svg.png";
+import logo1 from "../assets/linkedin.png";
 import logo2 from "../assets/github.png";
 import Footer from "../components/Footers";
 
