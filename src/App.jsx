@@ -21,36 +21,35 @@ function App() {
     <div>
       <Navbar />
       <br />
-      <div className="global-container">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/aboutme" element={<AboutPage />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/reviews" element={<ReviewsPage />} />
-          <Route path="/reviews/:reviewId" element={<ReviewDetails />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route
-            path="/admin/control-panel"
-            element={
-              <Admin>
-                <AdminControlPanel />
-              </Admin>
-            }
-          />
-          <Route
-            path="/admin/new-review"
-            element={
-              <Admin>
-                <ReviewAdd />
-              </Admin>
-            }
-          />
 
-          <Route path="/error" element={<ErrorPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/aboutme" element={<AboutPage />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/reviews" element={<ReviewsPage />} />
+        <Route path="/reviews/:reviewId" element={<ReviewDetails />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/admin/control-panel"
+          element={
+            <Admin>
+              <AdminControlPanel />
+            </Admin>
+          }
+        />
+        <Route
+          path="/admin/new-review"
+          element={
+            <Admin>
+              <ReviewAdd />
+            </Admin>
+          }
+        />
+
+        <Route path="/error" element={<ErrorPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </div>
   );
 }
