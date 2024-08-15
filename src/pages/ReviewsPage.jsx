@@ -10,6 +10,7 @@ function ReviewsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTitle, setSearchTitle] = useState("");
   const moviesPerPage = 10;
 
   useEffect(() => {
@@ -29,6 +30,7 @@ function ReviewsPage() {
             );
 
             const movieData = movieResponse.data;
+
             return {
               reviewId: review._id,
               movieId: movieData.id,
@@ -37,7 +39,7 @@ function ReviewsPage() {
             };
           })
         );
-
+        console.log(movieDetailsArray);
         setMovieDetails(movieDetailsArray);
       } catch (error) {
         setError("An error occurred while fetching data.");
@@ -48,12 +50,14 @@ function ReviewsPage() {
 
     fetchMovies();
   }, []);
-
+  const filteredMovies = movieDetails.filter((movie) =>
+    movie.title.toLowerCase().includes(searchTitle.toLowerCase())
+  );
   //Pagination calc
   const indexOfLastUser = currentPage * moviesPerPage;
   const indexOfFirstUser = indexOfLastUser - moviesPerPage;
-  const currentMovies = movieDetails.slice(indexOfFirstUser, indexOfLastUser);
-  const totalPages = Math.ceil(movieDetails.length / moviesPerPage);
+  const currentMovies = filteredMovies.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -65,7 +69,10 @@ function ReviewsPage() {
       setCurrentPage(currentPage - 1);
     }
   };
-
+  const handleSearchChange = (e) => {
+    setSearchTitle(e.target.value);
+    setCurrentPage(1);
+  };
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -73,6 +80,13 @@ function ReviewsPage() {
     <div>
       <div className="reviews-page">
         <h1 className="homepage-title">PELÍCULAS</h1>
+        <input
+          type="text"
+          placeholder="Buscar película..."
+          value={searchTitle}
+          onChange={handleSearchChange}
+          style={{ backgroundColor: "rgb(249, 207, 120)", color: "black" }}
+        />
         <div className="movies-container">
           {currentMovies.length > 0 ? (
             currentMovies.map((movie) => (
