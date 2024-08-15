@@ -63,9 +63,8 @@ function LastReview() {
           <p>{movieData.overview}</p>
           <Link to={`/reviews/${reviewId}`}>
             <img
-              src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w300${movieData.poster_path}`}
               alt={movieData.title}
-              style={{ width: "200px" }}
               className="lastReview-img"
             />
           </Link>

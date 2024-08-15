@@ -1,29 +1,43 @@
+/* Estilos generales */
 #root {
   margin: 0 15px;
 }
+
 body,
 html {
   height: 100%;
 }
 
+/* Formularios y entradas */
 .signup-inputs {
   display: flex;
   flex-direction: column;
 }
+
 .signup-inputs label {
   margin-bottom: 10px;
 }
+
 .signup-inputs input {
   padding: 10px;
 }
-.nav-img {
-  border-radius: 50px;
+
+.review-form {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 }
 
-/* Abre navbar menu */
+.rating {
+  display: flex;
+  flex-direction: column;
+}
 
+.rating input {
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+/* Navegación */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -46,10 +60,6 @@ html {
   text-decoration: none;
   padding: 10px 0;
   font-size: 1.2em;
-  height: 50px;
-}
-
-.menu-item {
   height: 50px;
 }
 
@@ -84,91 +94,40 @@ html {
   margin-bottom: 20px;
 }
 
-/* Cierra navbar menu */
-
-.search-bar {
+/* Imágenes y tarjetas */
+.nav-img {
+  border-radius: 50px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-direction: column;
-  padding: 10px;
 }
-.movie-poster {
-  width: 200px;
-  height: 300px;
+.lastReview-img {
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  margin-top: 20px;
+}
+.movie-poster2 {
+  width: 300px;
+  height: 450px;
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
+
 .movie-poster img {
   border-radius: 5px;
 }
-.review-form {
-  display: flex;
-  flex-direction: column;
-}
-.rating {
-  display: flex;
-  flex-direction: column;
-}
-.rating input {
-  margin-bottom: 10px;
-  width: fit-content;
-}
-.review {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-.slick-dots {
-  display: none !important;
-}
+
 .actor-photo {
   width: 200px;
   height: 300px;
   object-fit: cover;
 }
+
 .actor-card {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.comment-text {
-  display: flex;
-  flex-direction: column;
-}
-.title-sinopsis {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.details-title {
-  border: 1px yellowgreen solid;
-  border-radius: 10px;
-  color: yellow;
-}
-.reviews-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.movie-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.personal-review {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.delete-edit {
-  display: flex;
-  justify-content: space-between;
-}
+
 .user-card {
   border: #3e7589 1px solid;
   border-radius: 10px;
@@ -178,10 +137,21 @@ html {
   margin-bottom: 2vh;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
+
 .user-card p {
   display: flex;
   justify-content: space-between;
 }
+
+/* Búsqueda y paginación */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -200,18 +170,73 @@ html {
 .pagination span {
   font-size: 16px;
 }
+
+/* Contenedores de página y secciones */
 .page-container {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
+
+.title-sinopsis,
+.reviews-page,
+.movie-info,
+.personal-review,
 .last-review {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.popular-movies {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Estilos de texto */
+.details-title {
+  border: 1px yellowgreen solid;
+  border-radius: 10px;
+  color: yellow;
+}
+
+.homepage-title {
+  color: #3e7589;
+  font-size: 3vh;
+  text-align: center;
+}
+
+.homepage-title2 {
+  color: #f9c54d;
+  margin: 5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.title-details {
+  text-align: center;
+  text-transform: uppercase;
+  color: #3e7589;
+}
+
+.overview {
   text-align: justify;
 }
+
+/* Botones y controles */
+.delete-edit {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detailsBtn {
+  background-color: rgb(165, 137, 103);
+  border-radius: 5px;
+}
+
+/* Pie de página */
 .footer {
   background-color: #a18d6e;
   color: #fff;
@@ -280,6 +305,86 @@ html {
   font-size: 12px;
 }
 
+/* Perfil de usuario */
+.user1 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.about-me {
+  text-align: justify;
+}
+
+.profile-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profile-input {
+  width: 250px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #a18d6e;
+  margin: 0px 0 30px 0;
+  font-size: 1em;
+}
+
+.profile-form label {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #5897d3;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.profile-save {
+  width: 50%;
+  height: 40px;
+  background-color: #5897d3;
+  color: #444;
+  border-radius: 8px;
+}
+
+.edit-button {
+  position: absolute;
+  right: 80px;
+}
+
+/* Carrusel */
+.slick-dots {
+  display: none !important;
+}
+
+.slick-slider {
+  position: relative;
+  z-index: 100;
+}
+
+.slide-container {
+  position: relative;
+  z-index: 200;
+}
+
+/* Media queries */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
@@ -292,107 +397,4 @@ html {
   .footer-bottom {
     font-size: 10px;
   }
-}
-.popular-movies {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.movie-photo {
-  width: 200px !important;
-  height: 300px !important;
-}
-.homepage-title {
-  color: #3e7589;
-  font-size: 3vh;
-  text-align: center;
-}
-.homepage-title2 {
-  color: #f9c54d;
-  margin: 5px;
-  text-align: center;
-  text-transform: uppercase;
-}
-.overview {
-  text-align: justify;
-}
-.title-details {
-  text-align: center;
-  text-transform: uppercase;
-  color: #3e7589;
-}
-.detailsBtn {
-  background-color: rgb(165, 137, 103);
-  border-radius: 5px;
-}
-.user1 {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 10px;
-}
-.movie-poster2 {
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-}
-
-.lastReview-img {
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-}
-.name {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  flex-direction: column;
-}
-.about-me {
-  text-align: justify;
-}
-.slick-slider {
-  position: relative;
-  z-index: 100;
-}
-.slide-container {
-  position: relative;
-  z-index: 200;
-}
-.profile-form {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-.profile-input {
-  width: 250px;
-  height: 30px;
-  border-radius: 10px;
-  background-color: #a18d6e;
-  margin: 0px 0 30px 0;
-  font-size: 1em;
-}
-.profile-form label {
-  display: flex;
-  flex-direction: column;
-}
-.profile-div {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  border-color: #9c1b6b;
-  border: 1px solid;
-
-  margin: 20px;
-  padding: 20px;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-}
-.profile-save {
-  width: 50%;
-  height: 40px;
-  background-color: lightskyblue;
-  color: #444;
-  border-radius: 8px;
-}
-.edit-button {
-  position: absolute;
-  right: 80px;
 }

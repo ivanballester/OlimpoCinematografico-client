@@ -65,7 +65,7 @@ function ReviewsPage() {
                   <h2 className="homepage-title2">{movie.title}</h2>
                   <Link to={`/reviews/${movie.reviewId}`}>
                     <img
-                      src={`https://image.tmdb.org/t/p/w200${movie.posterPath}`}
+                      src={`https://image.tmdb.org/t/p/w300${movie.posterPath}`}
                       alt={movie.title}
                       className="movie-poster"
                       style={{ cursor: "pointer" }}

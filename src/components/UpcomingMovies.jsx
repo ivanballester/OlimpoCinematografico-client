@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-function PopularMovies() {
+function Upcoming() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ function PopularMovies() {
 
   const getMovies = async () => {
     try {
-      const response = await tmdbService.get("/movie/popular?language=es-ES");
+      const response = await tmdbService.get("/movie/upcoming?language=es-ES");
       const movieList = response.data.results;
       console.log(movieList);
       setMovies(movieList);
@@ -38,7 +38,7 @@ function PopularMovies() {
 
   return (
     <div>
-      <h1 className="homepage-title">PELÍCULAS POPULARES</h1>
+      <h1 className="homepage-title">PRONTO...</h1>
       <div>
         <Slider {...settings}>
           {movies.map((movie) => {
@@ -53,6 +53,9 @@ function PopularMovies() {
                   alt={movie.title}
                   style={{ height: "300px" }}
                 />
+                <p style={{ textAlign: "center", color: "#f9c54d" }}>
+                  {movie.release_date}
+                </p>
               </div>
             );
           })}
@@ -62,4 +65,4 @@ function PopularMovies() {
   );
 }
 
-export default PopularMovies;
+export default Upcoming;
