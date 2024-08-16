@@ -376,11 +376,6 @@ html {
   border-radius: 8px;
 }
 
-.edit-button {
-  position: absolute;
-  right: 80px;
-}
-
 /* Carrusel */
 .slick-dots {
   display: none !important;

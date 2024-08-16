@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import user from "../assets/user.png";
 import service from "../service/service.config";
-import edit from "../assets/edit.png";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 
@@ -62,7 +61,6 @@ function ProfilePage() {
     <div className="profile-div">
       <div>
         <img src={user} alt="foto" width={300} />
-        <img src={edit} alt="edit" width={40} className="edit-button" />
       </div>
 
       <div>
