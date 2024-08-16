@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { searchMovies } from "../api/SearchMoviesApi";
-import { debounce } from "lodash"; // Import debounce function from lodash
+import { debounce } from "lodash";
 import { Link } from "react-router-dom";
 import service from "../service/service.config";
 
@@ -26,7 +26,7 @@ function SearchBar() {
     try {
       const results = await searchMovies(query);
 
-      setMovies(Array.isArray(results) ? results : []); // Ensure results is an array
+      setMovies(Array.isArray(results) ? results : []);
     } catch (error) {
       console.error("Error in debouncedSearch:", error);
       setError("An error occurred while fetching movies.");
@@ -38,13 +38,13 @@ function SearchBar() {
 
   const handleChange = (event) => {
     setQuery(event.target.value);
-    setShowList(true); // Show list when typing
-    debouncedSearch(event.target.value); // Call debounced search
+    setShowList(true);
+    debouncedSearch(event.target.value);
   };
 
   const handleSelectMovie = (movie) => {
     setSelectedMovie(movie);
-    setQuery(movie.title); // Autocomplete the search bar
+    setQuery(movie.title);
     setPosterUrl(`https://image.tmdb.org/t/p/w200${movie.poster_path}`);
     setShowList(false);
     setShowForm(true);
