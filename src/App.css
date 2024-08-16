@@ -524,6 +524,9 @@ html {
   .comments-container div {
     width: 50%;
   }
+  .comment {
+    width: 100%;
+  }
   .signup-form {
     border: #a18d6e 1px solid;
     border-radius: 5px;
