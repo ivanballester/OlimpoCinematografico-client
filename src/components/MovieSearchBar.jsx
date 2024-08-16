@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { searchMovies } from "../api/SearchMoviesApi";
 import { debounce } from "lodash";
-import { Link } from "react-router-dom";
 import service from "../service/service.config";
+import { useNavigate } from "react-router-dom";
 
 function SearchBar() {
   const [query, setQuery] = useState("");
@@ -15,6 +15,8 @@ function SearchBar() {
   const [rating, setRating] = useState(0);
   const [text, setText] = useState("");
   const [selectedMovie, setSelectedMovie] = useState(null);
+
+  const navigate = useNavigate();
 
   // Debounce the searchMovies function
   const debouncedSearch = debounce(async (query) => {
@@ -52,7 +54,6 @@ function SearchBar() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const token = localStorage.getItem("authToken");
 
     if (!selectedMovie) {
       setError("Please select a movie.");
@@ -66,6 +67,7 @@ function SearchBar() {
         text,
       });
       setShowForm(false);
+      navigate("/reviews");
     } catch (error) {
       console.error("Error submitting review:", error);
       setError("An error occurred while submitting the review.");
@@ -148,21 +150,7 @@ function SearchBar() {
             Subir crítica
           </button>
           {error && <p style={{ color: "red" }}>{error}</p>}
-          {/* Display error if any */}
         </form>
-      )}
-      {selectedMovie && (
-        <Link
-          to={`/reviews/${selectedMovie.id}`}
-          state={{
-            title: selectedMovie.title,
-            posterPath: selectedMovie.poster_path,
-          }}
-        >
-          <button style={{ backgroundColor: "rgb(165, 137, 103)" }}>
-            Ver detalles
-          </button>
-        </Link>
       )}
     </div>
   );
