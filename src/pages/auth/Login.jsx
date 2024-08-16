@@ -29,7 +29,7 @@ function Login() {
       localStorage.setItem("authToken", response.data.authToken);
 
       authenticateUser();
-      navigate("/reviews");
+      navigate("/");
     } catch (error) {
       console.log(error);
       if (error.response && error.response.status === 400) {
