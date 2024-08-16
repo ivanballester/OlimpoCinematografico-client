@@ -145,14 +145,12 @@ function ReviewDetails() {
         reviewId={reviewId}
       />
       <div className="comments-container">
-        <div>
-          <Comments
-            comments={comments}
-            user={user}
-            isAdmin={isAdmin}
-            handleDeleteComment={handleDeleteComment}
-          />
-        </div>
+        <Comments
+          comments={comments}
+          user={user}
+          isAdmin={isAdmin}
+          handleDeleteComment={handleDeleteComment}
+        />
 
         <div>
           <CommentForm reviewId={reviewId} onCommentAdded={addComment} />

@@ -3,13 +3,11 @@ import Stars from "./ReviewRatingStars";
 
 function Comments({ comments, user, isAdmin, handleDeleteComment }) {
   return (
-    <div>
+    <div className="comment1">
       <h3 style={{ marginBottom: "16px" }}>Comentarios</h3>
       {comments.map((comment, index) => (
-        <div key={index} className="comment">
-          <p
-            style={{ display: "flex", alignItems: "center", marginBottom: "0" }}
-          >
+        <div key={index} className="comment1">
+          <p>
             <strong>
               {(comment.creator?.name || "Unknown User")[0].toUpperCase() +
                 (comment.creator?.name || "Unknown User").slice(1)}

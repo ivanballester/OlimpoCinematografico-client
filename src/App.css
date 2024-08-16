@@ -524,8 +524,8 @@ html {
   .comments-container div {
     width: 50%;
   }
-  .comment {
-    width: 100%;
+  .comment1 {
+    width: 100% !important;
   }
   .signup-form {
     border: #a18d6e 1px solid;
