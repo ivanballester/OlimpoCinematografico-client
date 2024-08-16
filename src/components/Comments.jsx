@@ -7,7 +7,7 @@ function Comments({ comments, user, isAdmin, handleDeleteComment }) {
       <h3 style={{ marginBottom: "16px" }}>Comentarios</h3>
       {comments.map((comment, index) => (
         <div key={index} className="comment1">
-          <p>
+          <p style={{ color: "Black" }}>
             <strong>
               {(comment.creator?.name || "Unknown User")[0].toUpperCase() +
                 (comment.creator?.name || "Unknown User").slice(1)}
