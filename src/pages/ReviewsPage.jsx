@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import service from "../service/service.config";
 import tmdbservice from "../service/serviceTMDB";
 import Footer from "../components/Footers";
@@ -13,6 +13,8 @@ function ReviewsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTitle, setSearchTitle] = useState("");
   const moviesPerPage = 10;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -79,7 +81,7 @@ function ReviewsPage() {
         <Loading />
       </div>
     );
-  if (error) return <p>Error: {error}</p>;
+  if (error) return navigate("/error");
 
   return (
     <div style={{ textAlign: "center" }}>

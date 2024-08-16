@@ -1,6 +1,6 @@
 // ReviewDetails.js
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import service from "../service/service.config";
 import tmdbservice from "../service/serviceTMDB";
 import { AuthContext } from "../context/auth.context";
@@ -18,6 +18,8 @@ function ReviewDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user, isAdmin } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchReviewAndMovie = async () => {
@@ -84,7 +86,7 @@ function ReviewDetails() {
         <Loading />
       </div>
     );
-  if (error) return <p>Error: {error}</p>;
+  if (error) return navigate("/error");
 
   // Carousel settings
   const settings = {
