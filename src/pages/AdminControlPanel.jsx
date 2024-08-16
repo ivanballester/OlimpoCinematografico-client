@@ -3,6 +3,7 @@ import service from "../service/service.config";
 import logo from "../assets/user.png";
 import Pagination from "../components/pagination";
 import user1 from "../assets/user1.png";
+import Loading from "../components/Loading";
 
 function AdminControlPanel() {
   const [users, setUsers] = useState([]);
@@ -53,10 +54,12 @@ function AdminControlPanel() {
     }
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
+  if (loading)
+    return (
+      <div style={{ textAlign: "center" }}>
+        <Loading />
+      </div>
+    );
   if (users.length === 0) {
     return <p>No users found.</p>;
   }

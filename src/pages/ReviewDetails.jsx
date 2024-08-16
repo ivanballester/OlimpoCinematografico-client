@@ -8,6 +8,7 @@ import MovieDetails from "../components/MovieDetails";
 import Comments from "../components/Comments";
 import CommentForm from "../components/CommentForm";
 import Footer from "../components/Footers";
+import Loading from "../components/Loading";
 
 function ReviewDetails() {
   const { reviewId } = useParams();
@@ -77,7 +78,12 @@ function ReviewDetails() {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div style={{ textAlign: "center" }}>
+        <Loading />
+      </div>
+    );
   if (error) return <p>Error: {error}</p>;
 
   // Carousel settings

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import service from "../service/service.config";
 import tmdb from "../service/serviceTMDB";
 import { Link } from "react-router-dom";
+import Loading from "./Loading";
 
 function LastReview() {
   const [lastMovieId, setLastMovieId] = useState(null);
@@ -51,7 +52,12 @@ function LastReview() {
       setError(error);
     }
   };
-  if (loading) return <p>Cargando...</p>;
+  if (loading)
+    return (
+      <div style={{ textAlign: "center" }}>
+        <Loading />
+      </div>
+    );
   if (error) return <p>{error}</p>;
 
   return (

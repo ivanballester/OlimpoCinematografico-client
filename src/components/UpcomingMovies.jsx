@@ -3,6 +3,7 @@ import tmdbService from "../service/serviceTMDB";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import Loading from "./Loading";
 
 function Upcoming() {
   const [movies, setMovies] = useState([]);
@@ -59,9 +60,12 @@ function Upcoming() {
       },
     ],
   };
-  if (!movies) {
-    return <p>Loading...</p>;
-  }
+  if (!movies)
+    return (
+      <div style={{ textAlign: "center" }}>
+        <Loading />
+      </div>
+    );
 
   return (
     <div style={{ textAlign: "center" }}>

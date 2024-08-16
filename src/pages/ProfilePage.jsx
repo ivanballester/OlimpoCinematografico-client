@@ -3,6 +3,7 @@ import user from "../assets/user.png";
 import service from "../service/service.config";
 import edit from "../assets/edit.png";
 import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 function ProfilePage() {
   const [email, setEmail] = useState("");
@@ -50,9 +51,12 @@ function ProfilePage() {
     }
   };
 
-  if (loading) {
-    return <p>Cargando...</p>;
-  }
+  if (loading)
+    return (
+      <div style={{ textAlign: "center" }}>
+        <Loading />
+      </div>
+    );
 
   return (
     <div className="profile-div">

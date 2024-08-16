@@ -3,6 +3,7 @@ import tmdbService from "../service/serviceTMDB";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import Loading from "./Loading";
 
 function PopularMovies() {
   const [movies, setMovies] = useState([]);
@@ -60,7 +61,11 @@ function PopularMovies() {
     ],
   };
   if (!movies) {
-    return <p>Loading...</p>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   return (
