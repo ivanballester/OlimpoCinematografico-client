@@ -5,10 +5,10 @@ const service = axios.create({
 });
 
 service.interceptors.request.use((config) => {
-  // esto hace que TODAS las llamadas usadas con service van a ir acompañadas del token.
   const storedToken = localStorage.getItem("authToken");
   if (storedToken) {
     config.headers.authorization = `Bearer ${storedToken}`;
+    console.log("Stored Token:", storedToken);
   }
   return config;
 });

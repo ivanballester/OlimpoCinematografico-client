@@ -21,7 +21,9 @@ function AuthProviderWrapper(props) {
     }
 
     try {
-      const response = await service.get("/auth/verify");
+      const response = await service.get("/auth/verify", {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
 
       setIsLoggedIn(true);
       setIsLoading(false);
@@ -38,6 +40,8 @@ function AuthProviderWrapper(props) {
       setIsLoading(false);
       setUser(null);
       setIsAdmin(false);
+    } finally {
+      setIsLoading(false); // Siempre desactiva el estado de carga
     }
   };
 
