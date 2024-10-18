@@ -45,9 +45,9 @@ function Signup() {
     } catch (error) {
       console.log(error);
       if (error.response && error.response.status === 400) {
-        setErrorMessage(error.response.data.errorMessage);
+        setError(error.response.data.errorMessage);
       } else {
-        // aqui deberiamos hacer un navigate a pagina de error si hay fallo del servidor
+        setError("Error del servidor, intenta más tarde");
       }
     }
   };
@@ -102,7 +102,7 @@ function Signup() {
           Registrar
         </button>
 
-        {error && <p>{error}</p>}
+        {error && typeof error === "string" && <p>{error}</p>}
       </form>
     </div>
   );

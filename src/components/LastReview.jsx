@@ -35,7 +35,7 @@ function LastReview() {
       setLastMovieId(lastReview.movieId);
       setReviewId(lastReview._id);
     } catch (error) {
-      setError(error);
+      setError(error.message || "Failed to fetch last review.");
     }
   };
 
@@ -49,7 +49,7 @@ function LastReview() {
       const movieDetails = response.data;
       setMovieData(movieDetails);
     } catch (error) {
-      setError(error);
+      setError(error.message || "Failed to fetch last review.");
     }
   };
   if (loading)
